@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 using Mapster;
 using MovieStoreC.BL;
 using MovieStoreC.BL.Interfaces;
 using MovieStoreC.DL;
 
+=======
+>>>>>>> 5aa0808bae28cbe8b1c2c36a9262fcf921944919
 namespace MovieStoreC
 {
     public class Program
@@ -12,6 +15,7 @@ namespace MovieStoreC
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+<<<<<<< HEAD
             builder.Services
                 .RegisterRepositories()
                 .RegisterServices();
@@ -31,6 +35,13 @@ namespace MovieStoreC
             }
 
 
+=======
+
+            builder.Services.AddControllers();
+
+            var app = builder.Build();
+
+>>>>>>> 5aa0808bae28cbe8b1c2c36a9262fcf921944919
             // Configure the HTTP request pipeline.
 
             app.UseAuthorization();

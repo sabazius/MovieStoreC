@@ -13,15 +13,19 @@ namespace MovieStoreC.BL.Services
             _movieRepository = movieRepository;
         }
 
+<<<<<<< HEAD
         public void Add(Movie movie)
         {
             //_movieRepository.Add(movie);
         }
 
+=======
+>>>>>>> 5aa0808bae28cbe8b1c2c36a9262fcf921944919
         public List<Movie> GetAll()
         {
             return _movieRepository.GetAll();
         }
+<<<<<<< HEAD
 
         public Movie? GetById(int id)
         {
@@ -29,5 +33,7 @@ namespace MovieStoreC.BL.Services
 
             return _movieRepository.GetById(id);
         }
+=======
+>>>>>>> 5aa0808bae28cbe8b1c2c36a9262fcf921944919
     }
 }

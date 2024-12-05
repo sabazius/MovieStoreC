@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
@@ -16,4 +17,6 @@
     <ProjectReference Include="..\MovieStoreC.BL\MovieStoreC.BL.csproj" />
   </ItemGroup>
 
+=======
+>>>>>>> 5aa0808bae28cbe8b1c2c36a9262fcf921944919
 </Project>
