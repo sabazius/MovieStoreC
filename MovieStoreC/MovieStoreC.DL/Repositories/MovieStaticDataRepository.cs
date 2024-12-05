@@ -8,17 +8,15 @@ namespace MovieStoreC.DL.Repositories
     {
         public List<Movie> GetAll()
         {
-            return StaticDb.Movies;
+            return StaticDb.Movie;
         }
 
         public Movie? GetById(int id)
         {
             if (id <= 0) return null;
 
-            return StaticDb.Movies
+            return StaticDb.Movie
                 .FirstOrDefault(x => x.Id == id);
         }
     }
-
-   
 }
