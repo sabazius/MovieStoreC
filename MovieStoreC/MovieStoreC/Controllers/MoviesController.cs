@@ -38,9 +38,9 @@ namespace MovieStoreC.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("GetById")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(string id)
         {
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
             {
                 return BadRequest($"Wrong ID:{id}");
             }

@@ -23,9 +23,9 @@ namespace MovieStoreC.BL.Services
             return _movieRepository.GetAll();
         }
 
-        public Movie? GetById(int id)
+        public Movie? GetById(string id)
         {
-            if (id <= 0) return null;
+            if (string.IsNullOrEmpty(id)) return null;
 
             return _movieRepository.GetById(id);
         }

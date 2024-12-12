@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieStoreC.BL.Interfaces;
+using MovieStoreC.Models.DTO;
+using MovieStoreC.Models.Requests;
 
 namespace MovieStoreC.Controllers
 {
@@ -10,7 +12,7 @@ namespace MovieStoreC.Controllers
         private readonly IBusinessService _movieService;
 
         public BusinessController(IBusinessService movieService)
-            
+
         {
             _movieService = movieService;
         }
@@ -18,7 +20,7 @@ namespace MovieStoreC.Controllers
         [HttpGet("GetAllDetailedMovies")]
         public IActionResult GetAllDetailedMovies()
         {
-            var result = 
+            var result =
                 _movieService.GetAllMovies();
 
             if (result != null && result.Count > 0)
@@ -28,5 +30,21 @@ namespace MovieStoreC.Controllers
 
             return NotFound();
         }
+
+        [HttpPost("Test")]
+        public IActionResult Test([FromBody] TestRequest movie)
+        {
+            
+            return Ok();
+        }
+    }
+
+    public class TestRequest
+    {
+        public int MagicNumber { get; set; }
+
+        public string Text { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }
