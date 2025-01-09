@@ -26,6 +26,23 @@ namespace MovieStoreC.DL.Repositories.MongoDb
             _moviesCollection = database.GetCollection<Movie>("MoviesDb");
         }
 
+        public void Add(Movie? movie)
+        {
+            if (movie == null)
+            {
+                _logger.LogError("Movie is null");
+                return;
+            }
+            try
+            {
+                _moviesCollection.InsertOne(movie);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to add movie");
+            }
+        }
+
         public List<Movie> GetAll()
         {
             return _moviesCollection.Find(m => true)
