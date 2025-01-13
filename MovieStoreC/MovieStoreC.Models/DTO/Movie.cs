@@ -8,6 +8,6 @@
 
         public int Year { get; set; }
 
-        public List<int> Actors { get; set; }
+        public List<string> Actors { get; set; }
     }
 }
