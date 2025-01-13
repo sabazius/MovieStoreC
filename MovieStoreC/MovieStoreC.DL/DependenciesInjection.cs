@@ -15,7 +15,7 @@ namespace MovieStoreC.DL
                     .AddSingleton<IMovieRepository,
                         MoviesMongoRepository>()
                     .AddSingleton<IActorRepository,
-                        ActorStaticDataRepository>();
+                        ActorRepository>();
         }
     }
 }
