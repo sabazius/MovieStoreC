@@ -7,6 +7,9 @@ namespace MovieStoreC.BL.Interfaces
         List<Movie> GetAll();
 
         Movie? GetById(string id);
+
         void Add(Movie movie);
+
+        void AddActorToMovie(string movieId, string actor);
     }
 }

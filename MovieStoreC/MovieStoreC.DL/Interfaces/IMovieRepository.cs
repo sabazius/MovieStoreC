@@ -9,5 +9,7 @@ namespace MovieStoreC.DL.Interfaces
         Movie? GetById(string id);
 
         void Add(Movie movie);
+
+        void Update(Movie movie);
     }
 }

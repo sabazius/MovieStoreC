@@ -57,5 +57,10 @@ namespace MovieStoreC.DL.Repositories.MongoDb
                 _logger.LogError(e, "Failed to add movie");
             }
         }
+
+        public void Update(Movie movie)
+        {
+            _moviesCollection.ReplaceOne(m => m.Id == movie.Id, movie);
+        }
     }
 }
