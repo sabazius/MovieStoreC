@@ -19,35 +19,42 @@ namespace MovieStoreC.DL.Repositories.MongoDb
         {
             _logger = logger;
 
-            var client = 
+            var client =
                 new MongoClient(mongoConfig.CurrentValue.ConnectionString);
             var database = client.GetDatabase(
                 mongoConfig.CurrentValue.DatabaseName);
             _moviesCollection = database.GetCollection<Movie>("MoviesDb");
         }
 
-        public List<Movie> GetAll()
+        public async Task<List<Movie>> GetAll(int year)
+        {
+            var result = await _moviesCollection.FindAsync(m => m.Year == year);
+
+            return await result.ToListAsync();
+        }
+
+        public async Task<List<Movie>> GetAll()
         {
             return _moviesCollection.Find(m => true)
                 .ToList();
         }
 
-        public Movie? GetById(string id)
+        public Task<Movie?> GetById(string id)
         {
             return _moviesCollection
                 .Find(m => m.Id == id)
                 .FirstOrDefault();
         }
 
-        public void Add(Movie? movie)
+        public async Task Add(Movie? movie)
         {
             if (movie == null)
             {
                 _logger.LogError("Movie is null");
+
                 return;
             }
 
-            
             try
             {
                 _moviesCollection.InsertOne(movie);

@@ -22,7 +22,7 @@ namespace MovieStoreC.BL.Services
             _actorRepository = actorRepository;
         }
 
-        public void Add(Movie movie)
+        public async Task Add(Movie movie)
         {
             if (movie == null)
             {
@@ -32,8 +32,7 @@ namespace MovieStoreC.BL.Services
 
             movie.Id = Guid.NewGuid().ToString();
 
-            _movieRepository.Add(movie);
-
+            await _movieRepository.Add(movie);
         }
 
         public void AddActorToMovie(string movieId, string actorId)

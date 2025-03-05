@@ -8,7 +8,7 @@ namespace MovieStoreC.BL.Interfaces
 
         Movie? GetById(string id);
 
-        void Add(Movie movie);
+        Task Add(Movie movie);
 
         void AddActorToMovie(string movieId, string actor);
     }
