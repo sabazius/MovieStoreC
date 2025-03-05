@@ -96,7 +96,6 @@ namespace MovieStoreC.Tests
             _movieRepositoryMock.Setup(x => x.GetById(It.IsAny<string>()))
                 .Returns((string id) => _movies.FirstOrDefault(m => m.Id == id));
 
-            //var logger = Mock.Of<ILogger<MoviesService>>();
             var loggerMock = new Mock<ILogger<MoviesService>>();
             ILogger<MoviesService> logger = loggerMock.Object;
 
