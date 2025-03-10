@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MovieStoreC.BL.Interfaces;
 using MovieStoreC.Models.DTO;
 using MovieStoreC.Models.Requests;
+using System.Threading.Tasks;
 
 namespace MovieStoreC.Controllers
 {
@@ -12,18 +13,16 @@ namespace MovieStoreC.Controllers
         private readonly IBusinessService _movieService;
 
         public BusinessController(IBusinessService movieService)
-
         {
             _movieService = movieService;
         }
 
         [HttpGet("GetAllDetailedMovies")]
-        public IActionResult GetAllDetailedMovies()
+        public async Task<IActionResult> GetAllDetailedMovies()
         {
-            var result =
-                _movieService.GetAllMovies();
+            var result = await _movieService.GetAllMovies();
 
-            if (result != null && result.Count > 0)
+            if (result != null && result.Count > 0)  
             {
                 return Ok(result);
             }
@@ -32,9 +31,11 @@ namespace MovieStoreC.Controllers
         }
 
         [HttpPost("Test")]
-        public IActionResult Test([FromBody] TestRequest movie)
+        public async Task<IActionResult> Test([FromBody] TestRequest request)
         {
-            
+            // Assuming the service handles some logic here asynchronously
+            // await _movieService.ProcessTestRequest(request); (Uncomment and modify this as necessary)
+
             return Ok();
         }
     }

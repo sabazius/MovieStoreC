@@ -4,12 +4,12 @@ namespace MovieStoreC.BL.Interfaces
 {
     public interface IMoviesService
     {
-        List<Movie> GetAll();
+        Task<List<Movie>> GetAll();
 
-        Movie? GetById(string id);
+        Task<Movie?> GetById(string id);
 
-        void Add(Movie movie);
+        Task Add(Movie movie);
 
-        void AddActorToMovie(string movieId, string actor);
+        Task AddActorToMovie(string movieId, string actor);
     }
 }

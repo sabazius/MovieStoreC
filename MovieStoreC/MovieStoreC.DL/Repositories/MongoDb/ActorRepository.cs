@@ -1,23 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using MovieStoreC.DL.Interfaces;
+using MovieStoreC.Models.Configurations;
 using MovieStoreC.Models.DTO;
 
 namespace MovieStoreC.DL.Repositories.MongoDb
 {
-    internal class ActorRepository : IActorRepository
+    internal class ActorMongoRepository : IActorRepository
     {
-        public List<Actor> GetAll()
+        private readonly IMongoCollection<Actor> _actorsCollection;
+        private readonly ILogger<ActorMongoRepository> _logger;
+
+        public ActorMongoRepository(
+            IOptionsMonitor<MongoDbConfiguration> mongoConfig,
+            ILogger<ActorMongoRepository> logger)
         {
-            throw new NotImplementedException();
+            _logger = logger;
+
+            var client =
+                new MongoClient(mongoConfig.CurrentValue.ConnectionString);
+            var database = client.GetDatabase(
+                mongoConfig.CurrentValue.DatabaseName);
+            _actorsCollection = database.GetCollection<Actor>("Actors");
         }
 
-        public Actor? GetById(string id)
+        public async Task<List<Actor>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Asynchronously retrieving all actors
+                return await _actorsCollection.Find(a => true).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to retrieve actors");
+                return new List<Actor>();
+            }
+        }
+
+        public async Task<Actor?> GetById(string id)
+        {
+            try
+            {
+                // Asynchronously retrieving an actor by ID
+                return await _actorsCollection
+                    .Find(a => a.Id == id)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to retrieve actor by ID");
+                return null;
+            }
         }
     }
 }

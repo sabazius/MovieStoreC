@@ -19,27 +19,42 @@ namespace MovieStoreC.DL.Repositories.MongoDb
         {
             _logger = logger;
 
-            var client = 
+            var client =
                 new MongoClient(mongoConfig.CurrentValue.ConnectionString);
             var database = client.GetDatabase(
                 mongoConfig.CurrentValue.DatabaseName);
             _moviesCollection = database.GetCollection<Movie>("MoviesDb");
         }
 
-        public List<Movie> GetAll()
+        public async Task<List<Movie>> GetAll()
         {
-            return _moviesCollection.Find(m => true)
-                .ToList();
+            try
+            {
+                return await _moviesCollection.Find(m => true).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to retrieve movies");
+                return new List<Movie>();
+            }
         }
 
-        public Movie? GetById(string id)
+        public async Task<Movie?> GetById(string id)
         {
-            return _moviesCollection
-                .Find(m => m.Id == id)
-                .FirstOrDefault();
+            try
+            {
+                return await _moviesCollection
+                    .Find(m => m.Id == id)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to retrieve movie by id");
+                return null;
+            }
         }
 
-        public void Add(Movie? movie)
+        public async Task Add(Movie? movie)
         {
             if (movie == null)
             {
@@ -47,10 +62,9 @@ namespace MovieStoreC.DL.Repositories.MongoDb
                 return;
             }
 
-            
             try
             {
-                _moviesCollection.InsertOne(movie);
+                await _moviesCollection.InsertOneAsync(movie);
             }
             catch (Exception e)
             {
@@ -58,9 +72,16 @@ namespace MovieStoreC.DL.Repositories.MongoDb
             }
         }
 
-        public void Update(Movie movie)
+        public async Task Update(Movie movie)
         {
-            _moviesCollection.ReplaceOne(m => m.Id == movie.Id, movie);
+            try
+            {
+                await _moviesCollection.ReplaceOneAsync(m => m.Id == movie.Id, movie);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to update movie");
+            }
         }
     }
 }

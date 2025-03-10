@@ -4,8 +4,8 @@ namespace MovieStoreC.DL.Interfaces
 {
     public interface IActorRepository
     {
-        List<Actor> GetAll();
+        Task<List<Actor>> GetAll();
 
-        Actor? GetById(string id);
+        Task<Actor?> GetById(string id);
     }
 }
