@@ -4,6 +4,6 @@ namespace MovieStoreC.BL.Interfaces
 {
     public interface IBusinessService
     {
-        List<MovieFullDetailsResponse> GetAllMovies();
+        Task<List<MovieFullDetailsResponse>> GetAllMovies();
     }
 }

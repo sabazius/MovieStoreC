@@ -31,20 +31,5 @@ namespace MovieStoreC.Controllers
             return NotFound();
         }
 
-        [HttpPost("Test")]
-        public IActionResult Test([FromBody] TestRequest movie)
-        {
-            
-            return Ok();
-        }
-    }
-
-    public class TestRequest
-    {
-        public int MagicNumber { get; set; }
-
-        public string Text { get; set; }
-
-        public DateTime DateTime { get; set; }
     }
 }

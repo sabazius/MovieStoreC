@@ -56,11 +56,16 @@ namespace MovieStoreC.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add([FromBody]AddMovieRequest movie)
+        public async Task<IActionResult> Add([FromBody]AddMovieRequest movie)
         {
+            if (movie == null)
+            {
+                return BadRequest("Movie is null");
+            }
+
             var movieDto = _mapper.Map<Movie>(movie);
 
-            _movieService.Add(movieDto);
+            await _movieService.Add(movieDto);
 
             return Ok();
         }
